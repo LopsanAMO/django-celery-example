@@ -35,6 +35,12 @@ ALLOWED_HOSTS = []
 
 BROKER_URL = 'amqp://guest:guest@localhost//'
 
+BROKER_HOST = "localhost"
+BROKER_PORT = 5672
+BROKER_USER = "guest"
+BROKER_PASSWORD = "guest"
+BROKER_VHOST = "/"
+
 # Fecha de planificacion para celery
 
 dia = datetime.strptime(str(date.today())+ ' 20:15', "%Y-%m-%d %H:%M")
