@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -31,6 +32,10 @@ ALLOWED_HOSTS = []
 
 BROKER_URL = 'amqp://guest:guest@localhost//'
 
+# para usar la base de datos como backends
+
+CELERY_RESULT_BACKEND='djcelery.backends.database:DatabaseBackend'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -41,8 +46,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
-    'djcelery', 
+    'djcelery',
 ]
+
+import djcelery
+djcelery.setup_loader()
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
