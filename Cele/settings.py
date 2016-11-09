@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# variable para trabajar con rabbitmq y celery
+
+BROKER_URL = 'amqp://guest:guest@localhost//'
 
 # Application definition
 
@@ -37,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'app',
+    'djcelery', 
 ]
 
 MIDDLEWARE = [
