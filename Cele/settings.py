@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from celery.schedules import crontab
 
+#importacion de fechas para la planificacion de tareas de Celery
+from datetime import date, datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -32,9 +35,23 @@ ALLOWED_HOSTS = []
 
 BROKER_URL = 'amqp://guest:guest@localhost//'
 
+# Fecha de planificacion para celery
+
+dia = datetime.strptime(str(date.today())+ ' 20:15', "%Y-%m-%d %H:%M")
+
 # para usar la base de datos como backends
 
 CELERY_RESULT_BACKEND='djcelery.backends.database:DatabaseBackend'
+
+# Comando para planificar una tarea periodicamente
+
+CELERYBEAT_SCHEDULE = {
+    'add-every-30-seconds': {
+        'task': 'app.tasks.add’',
+        'schedule': crontab(minute='*/1'),
+        'args': (15, 35)
+    },
+}
 
 # Application definition
 
